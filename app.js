@@ -6,7 +6,7 @@ const io = require('socket.io')(server);
 const socketClient = require('socket.io-client');
 
 // Connect to Server B (use Server B's IP or hostname here)
-const socketB = socketClient('http://server-b:3000');  // Docker container or server name
+const socketB = socketClient('http://65.1.111.14:3000');  // Docker container or server name
 
 // Serve the chat HTML file
 app.get('/', (req, res) => {
