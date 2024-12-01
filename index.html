@@ -4,11 +4,27 @@
   <title>Chat App</title>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    var socket = io();
+    var socket = io();  // Connect to the server
+
+    // Emit a message when the user submits a message
+    function sendMessage() {
+      var message = document.getElementById('message').value;
+      socket.emit('chat message', message);  // Send message to server
+      document.getElementById('message').value = '';  // Clear input
+    }
+
+    // Listen for messages from the server and display them
+    socket.on('chat message', function(msg) {
+      var messageList = document.getElementById('messages');
+      var li = document.createElement('li');
+      li.textContent = msg;
+      messageList.appendChild(li);
+    });
   </script>
 </head>
 <body>
   <h1>Chat Room</h1>
-  <p>Chat functionality goes here</p>
+  <ul id="messages"></ul>
+  <input id="message" autocomplete="off" /><button onclick="sendMessage()">Send</button>
 </body>
 </html>
